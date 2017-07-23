@@ -2,11 +2,11 @@ Collection of helper functions for all my matlab programs https://github.com/Eug
 
 Place on same level as program folders, i.e.:
 
-- Matlab
--- Common
---- CommonFunctionX.m
--- ProgramX
---- MainProgramY.m
+Matlab
+Matlab/Common
+Matlab/Common/CommonFunctionX.m
+Matlab/ProgramY
+Matlab/ProgramY/MainProgramY.m
 
 Author: Eugen Zimmermann, Konstanz, 2016 eugen.zimmermann [at] uni-konstanz [dot] de
 
