@@ -39,7 +39,7 @@ parse(input,value,start,stop);
         if ~status
             errordlg(['Input must be between ',num2str(start),' and ',num2str(stop)], 'Error')
             result = -888;
-            return;
+            return
         end
 
         result = value;
