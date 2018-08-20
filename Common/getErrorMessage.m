@@ -19,6 +19,7 @@ function errMsg = getErrorMessage(errKey,varargin)
     E.serialPort    = '\nWhile setting ''serialPort'' property of ''%s'': \n-> Value must be ''COM[0-9]+'' for Windows. \n-> Value must be ''/dev/ttyS[0-9]+'' for Linux.';
     E.gpibPort      = '\nWhile setting ''gpibPort'' property of ''%s'': \n-> Value must be numeric and scalar.';
     E.connectionType = '\nWhile setting ''connetionType'' property of ''%s'': \n-> Value must be ''serial'' or ''gpib''';
+    E.connectionType = '\nWhile setting ''mode'' property of ''%s'': \n-> Value must be ''auto'' or ''manual''';
     
     E.deviceNotFound = '%s not found on port: %s  \nfound instead: ... %s';
     E.deviceNotConnected = 'Device %s not connected!';
@@ -26,19 +27,24 @@ function errMsg = getErrorMessage(errKey,varargin)
     E.percent     = '\nWhile setting a property in ''percent'' of ''%s'': \n-> Value must be numeric and in the range of 0 to 100 %%.';
     E.timeSeconds = '\nWhile setting a ''timeSeconds'' property of ''%s'': \n-> Value must be numeric and in the range of 0 to 600 s.';
     E.boolean = '\nWhile setting a ''state'' property of ''%s'': \n-> Value must be numeric (0 or 1), or logical (false or true).';
+    E.onoff = '\nWhile setting a ''on/off'' property of ''%s'': \n-> Value must be string (''ON'' or ''OFF'').';
     E.temperature = '\nWhile setting a ''temperature'' property of ''%s'': \n-> Value must be numeric and in the range of 0 to 320 K.';
     E.tries = '\nWhile setting a ''tries'' property of ''%s'': \n-> Value must be numeric and in the range of 0 to 10.';
     
     E.keithleySetV = '\nWhile setting a voltage property of ''%s'': \n-> Value must be numeric and in the range of -20 to 20 V.';
+    E.keithleySetI = '\nWhile setting a current property of ''%s'': \n-> Value must be numeric and in the range of -1 to 1 A.';
     E.keithleySetMultV = E.keithleySetV;
     E.keithleySetStepV = '\nWhile setting a voltage step property of ''%s'': \n-> Value must be numeric and in the range of 0.001 to 5 V.';
+    E.keithleyList = '\nWhile setting a list of ''%s'': \n-> List must be an 1D numeric array with values in the range of -20 to 20 V and a maximum of 2500 elements.';
     E.keithleyDelay = '\nWhile setting a time property of ''%s'': \n-> Value must be numeric and in the range of 0 to 9999 s.';
     E.keithleyDelayMult = E.keithleyDelay;
-    E.keithleyDuration = '\nWhile setting a duration property of ''%s'': \n-> Value must be numeric and in the range of 0 to 9999 s.';
+    E.keithleyDuration = '\nWhile setting a duration property of ''%s'': \n-> Value must be numeric and in the range of 0 to 1E6 s.';
     E.keithleyIntegrationRate = '\nWhile setting the ''integrationRate'' property of ''%s'': \n-> Value must be numeric and in the range of 0.01 to 10.';
     E.keithleySpacing = '\nWhile setting the ''spacing'' property of ''%s'': \n-> Value must be ''LIN'' or ''LOG''.';
     E.keithleyMode = '\nWhile setting the ''mode'' property of ''%s'': \n-> Value must be ''I'' for current or ''V'' for voltage measurements.';
-    
+    E.keithleyOutputMode = '\nWhile setting the ''output off-state mode'' property of ''%s'': \n-> Value must be ''NORM'' for normal, ''ZERO'' for 0V, ''HIMP'' for high-impedance, or ''GUAR'' for guard (0A).';
+    E.keithleyProtLevel = '\nWhile setting the ''protection level'' property of ''%s'': \n-> Value must be numeric and greater than or equal to zero. ZERO = no protection level.';
+	
     E.keithleySetSourceV = '\nCould not set Voltage as source in %s!';
     E.keithleySetIntegrationRate = '\nCould not set integration rate in %s!';
     

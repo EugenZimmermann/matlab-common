@@ -20,22 +20,28 @@ function validFcn = validationFcn(fcnKey,fcnName)
     fcn.serialPort  = @(x) assert(~isempty(regexpi(num2str(x),'(^COM[0-9]+$|^/dev/ttyS[0-9]+$)')),getErrorMessage(fcnKey,fcnName));
     fcn.gpibPort    = @(x) assert(isnumeric(x) && isscalar(x) && (x > 0) && (x<256),getErrorMessage(fcnKey,fcnName));
     fcn.connectionType = @(x) assert(~isempty(regexpi(x,'^serial$|^gpib$')),getErrorMessage(fcnKey,fcnName));
+    fcn.mode        = @(x) assert(~isempty(regexpi(x,'^auto$|^manual$')),getErrorMessage(fcnKey,fcnName));
     
     fcn.percent     = @(x) assert(isnumeric(x) && isscalar(x) && x>0 && x<=100,getErrorMessage(fcnKey,fcnName));
     fcn.timeSeconds = @(x) assert(isnumeric(x) && isscalar(x) && x>0 && x<=600,getErrorMessage(fcnKey,fcnName));
     fcn.boolean     = @(x) assert((isnumeric(x) && isscalar(x) && (x==1||x==0))|islogical(x));
+    fcn.onoff       = @(x) assert(any(validatestring(x,{'ON','OFF'})),getErrorMessage(fcnKey,fcnName));
     fcn.temperature = @(x) assert(isnumeric(x) && isscalar(x) && x>=0 && x<=320,getErrorMessage(fcnKey,fcnName));
     fcn.tries       = @(x) assert(isnumeric(x) && isscalar(x) && x>=0 && x<=10,getErrorMessage(fcnKey,fcnName));
     
     fcn.keithleySetV        = @(x) assert(isnumeric(x) && isscalar(x) && abs(x)<=20,getErrorMessage(fcnKey,fcnName));
+    fcn.keithleySetI        = @(x) assert(isnumeric(x) && isscalar(x) && abs(x)<=1.05,getErrorMessage(fcnKey,fcnName));
     fcn.keithleySetMultV    = @(x) assert(isnumeric(x) && max(abs(x))<=20,getErrorMessage(fcnKey,fcnName));
     fcn.keithleySetStepV    = @(x) assert(isnumeric(x) && isscalar(x) && (abs(x)>=0.00001 && abs(x)<=5),getErrorMessage(fcnKey,fcnName));
+    fcn.keithleyList        = @(x) assert(isnumeric(x) && ~(size(x,1)>1 && size(x,2>1)) && length(x)>=1 && length(x)<=2500 && max(abs(x))<=20,getErrorMessage(fcnKey,fcnName));
     fcn.keithleyDelay       = @(x) assert(isnumeric(x) && isscalar(x) && x>=0 && x<=9999,getErrorMessage(fcnKey,fcnName));
     fcn.keithleyDelayMult   = @(x) assert(isnumeric(x) && min(x)>=0 && max(x)<=9999,getErrorMessage(fcnKey,fcnName));
-    fcn.keithleyDuration    = @(x) assert(isnumeric(x) && isscalar(x) && x>=0 && x<=9999,getErrorMessage(fcnKey,fcnName));
+    fcn.keithleyDuration    = @(x) assert(isnumeric(x) && isscalar(x) && x>=0 && x<=1E6,getErrorMessage(fcnKey,fcnName));
     fcn.keithleyIntegrationRate = @(x) assert(isnumeric(x) && isscalar(x) && x>=0.01 && x<=10,getErrorMessage(fcnKey,fcnName));   
     fcn.keithleySpacing     = @(x) assert(any(validatestring(x,{'LIN','LOG'})),getErrorMessage(fcnKey,fcnName));
     fcn.keithleyMode        = @(x) assert(any(validatestring(x,{'I','V'})),getErrorMessage(fcnKey,fcnName));
+    fcn.keithleyOutputMode  = @(x) assert(any(validatestring(x,{'NORM','HIMP','ZERO','GUAR'})),getErrorMessage(fcnKey,fcnName));
+	fcn.keithleyProtLevel 	= @(x) assert(isnumeric(x) && isscalar(x) && x>=0,getErrorMessage(fcnKey,fcnName));
     
     fcn.fwsAbsPos = @(x) assert(isnumeric(x) && isscalar(x) && x>=0 && x<=4000 && round(x)==x,getErrorMessage(fcnKey,fcnName));
     fcn.fwsRelPos = @(x) assert(isnumeric(x) && isscalar(x) && abs(x)<=4000 && round(x)==x,getErrorMessage(fcnKey,fcnName));
